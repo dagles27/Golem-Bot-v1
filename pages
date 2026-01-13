@@ -1,0 +1,19 @@
+import { WalletProvider } from '@solana/wallet-adapter-react';
+import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
+import { PhantomWalletAdapter } from '@solana/wallet-adapter-wallets';
+import { ConnectionProvider } from '@solana/web3.js';
+import TradingUI from '../components/TradingUI';
+
+const wallets = [new PhantomWalletAdapter()];
+
+export default function Home() {
+  return (
+    <ConnectionProvider endpoint="https://api.mainnet-beta.solana.com">
+      <WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>
+          <TradingUI />
+        </WalletModalProvider>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
+}
